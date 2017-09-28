@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+  <name>Snrj Galeri</name>
+  <id>snrj:SnrjGaleri</id>
+  <type>modification</type>
+  <version>1.0</version>
+
+	<install for="2.0 - 2.0.99, 2.1 Beta 3">
+		<readme parsebbc="true">readme.txt</readme>
+		<database>SnrjGaleriinstall.php</database>
+		<require-dir name="galeri" destination="$boarddir" />
+		<require-dir name="Sources" destination="$boarddir" />
+		<require-dir name="Themes" destination="$boarddir" />
+		<require-file name="watemark.png" destination="$boarddir" />
+		<redirect url="$scripturl?action=admin;area=modsettings;sa=admin_ayarlar" timeout="1000"></redirect>
+	</install>
+		
+	<uninstall for="2.0 - 2.0.99, 2.1 Beta 3">
+		<remove-file name="$sourcedir/class.upload.php" />
+		<remove-file name="$sourcedir/SnrjGaleri.php" />
+		<remove-file name="$sourcedir/SnrjGaleri-Hooks.php" />
+		<remove-file name="$sourcedir/Subs-SnrjGaleri.php" />
+		<remove-file name="$themedir/SnrjGaleri.template.php" />
+		<remove-file name="$themedir/languages/SnrjGaleri.turkish-utf8.php" />
+		<remove-file name="$themedir/languages/SnrjGaleri.turkish.php" />
+		<remove-file name="$themedir/languages/SnrjGaleri.english.php" />
+		<remove-file name="$boarddir/watemark.png" />
+		<code>SnrjGaleriinstall.php</code>
+		<redirect url="$scripturl?action=admin;area=packages" timeout="1000"></redirect>
+	</uninstall>
+</package-info>
