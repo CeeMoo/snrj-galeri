@@ -12,15 +12,13 @@ if (!defined('SMF'))
 
 function Galeri_Ana()
 {
-	global $txt, $sourcedir,$boardurl, $modSettings, $context, $scripturl,$mbname ;
+	global $txt, $sourcedir, $boardurl, $context, $scripturl, $mbname ;
 	loadTemplate('SnrjGaleri');
 	isAllowedTo('galerigor');
 	$context['galeri_url'] = $boardurl . '/galeri/';
-	$context['html_headers'] ='<link rel="stylesheet" type="text/css" href="'. $context['galeri_url']. '/css/galeri.css" />';
+	$context['html_headers'] ='<link rel="stylesheet" type="text/css" href="'. $context['galeri_url']. 'css/galeri.css" />';
 	$context['canonical_url'] = $scripturl.'?action=galeri';
 	$context['linktree'][] = array('name' => '<a href="' . $scripturl . '?action=galeri">'.$txt['galeri_baslik'].'</span></a>');
-	if (!empty($_GET))
-	$context['robot_no_index'] = true;
 	$context['page_title'] =$mbname . ' - ' . $txt['galeri_baslik'];
 	require_once($sourcedir . '/Subs-SnrjGaleri.php');
 	require_once($sourcedir . '/class.upload.php');
@@ -50,7 +48,7 @@ function Galeri_Ana()
 
 function ResimEkleme()
 {
-	global $user_info, $txt, $modSettings,$context, $sourcedir, $smcFunc;
+	global $user_info, $txt, $modSettings, $context, $sourcedir, $smcFunc;
 	isAllowedTo('resimekle');
 	if ( isset( $_POST[ 'yolla' ] ) ) {
 	if(empty($_REQUEST['baslik']))
@@ -162,7 +160,7 @@ function ResimEkleme()
 }
 function ResimeBak()
 {
-	global $context,$txt, $mbname, $scripturl, $sourcedir;
+	global $context, $txt, $mbname, $scripturl, $sourcedir;
 	isAllowedTo('galerigor');
 	if (isset($_REQUEST['resim']))
 		$id = (int) $_REQUEST['resim'];
@@ -187,7 +185,7 @@ function ResimeBak()
 
 function ResimSil()
 {
-	global $txt,$sourcedir;
+	global $txt, $sourcedir;
 	isAllowedTo('resimsil');	
 	if (isset($_REQUEST['resim']))
 	$id = (int) $_REQUEST['resim'];
@@ -206,7 +204,7 @@ function ResimSil()
 
 function ResimArama()
 {
-	global  $txt,$smcFunc,$sourcedir;
+	global  $txt, $smcFunc, $sourcedir;
 	$arama =  $smcFunc['htmlspecialchars']($_REQUEST['arama'],ENT_QUOTES);
 	if (empty($arama))
 	fatal_error($txt['hataarama'],false);
