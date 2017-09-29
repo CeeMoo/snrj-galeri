@@ -40,7 +40,7 @@ function galeriresim($type = 'son')
 	$query = "SELECT p.id_resim, p.id_uye, m.real_name, p.baslik, p.etiket, p.aciklama, p.dosyaismi, p.kucukdosyaismi, p.tarih,p.bakanlar,p.boyut, p.yukseklik, p.genislik,p.toplamderece, p.derece,p.tur
 		FROM {db_prefix}SnrjGaleri as p
 		LEFT JOIN {db_prefix}members AS m  ON (m.id_member = p.id_uye)
-		ORDER BY '$query_type' LIMIT " . $modSettings['snrjgaleri_sayfaresim'];
+		ORDER BY $query_type LIMIT " . $modSettings['snrjgaleri_sayfaresim'];
 
 	$dbresult = $smcFunc['db_query']('', $query);
 	$galeriresim = array();
@@ -188,7 +188,7 @@ function galeriresimara($ara)
     SELECT
     	p.id_resim, p.id_uye, m.real_name, p.baslik, p.etiket, p.aciklama, p.dosyaismi, p.kucukdosyaismi, p.tarih,p.bakanlar,p.boyut, p.yukseklik, p.genislik,p.toplamderece, p.derece,p.tur FROM {db_prefix}SnrjGaleri as p
     LEFT JOIN {db_prefix}members AS m ON (p.id_uye = m.id_member)
-    WHERE '$aramaquery' ");
+    WHERE $aramaquery ");
 	$arar = array();
 	while($row = $smcFunc['db_fetch_assoc']($dbresult))
 		{
