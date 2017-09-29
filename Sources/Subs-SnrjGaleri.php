@@ -40,7 +40,7 @@ function galeriresim($type = 'son')
 	$query = "SELECT p.id_resim, p.id_uye, m.real_name, p.baslik, p.etiket, p.aciklama, p.dosyaismi, p.kucukdosyaismi, p.tarih,p.bakanlar,p.boyut, p.yukseklik, p.genislik,p.toplamderece, p.derece,p.tur
 		FROM {db_prefix}SnrjGaleri as p
 		LEFT JOIN {db_prefix}members AS m  ON (m.id_member = p.id_uye)
-		ORDER BY $query_type LIMIT " . $modSettings['snrjgaleri_sayfaresim'];
+		ORDER BY '$query_type' LIMIT " . $modSettings['snrjgaleri_sayfaresim'];
 
 	$dbresult = $smcFunc['db_query']('', $query);
 	$galeriresim = array();
@@ -73,12 +73,12 @@ function galeriresimbak($galeri)
 	global $smcFunc;
 	$id = $galeri['id'];
     $smcFunc['db_query']('', "UPDATE {db_prefix}SnrjGaleri
-		SET bakanlar = bakanlar + 1 WHERE id_resim= $id LIMIT 1");
+		SET bakanlar = bakanlar + 1 WHERE id_resim= '$id' LIMIT 1");
 	$query = "SELECT p.id_resim, p.id_uye, m.real_name, p.baslik, p.etiket, p.aciklama, p.dosyaismi, p.kucukdosyaismi, p.tarih,p.bakanlar,p.boyut, p.yukseklik, p.genislik,p.toplamderece, p.derece,p.tur
 		FROM {db_prefix}SnrjGaleri as p
 		LEFT JOIN {db_prefix}members AS m  ON (m.id_member = p.id_uye)
-		WHERE   p.id_resim= $id
-		ORDER BY p.id_resim= $id DESC  LIMIT 1";
+		WHERE   p.id_resim= '$id'
+		ORDER BY p.id_resim= '$id' DESC  LIMIT 1";
 
 	$dbresult = $smcFunc['db_query']('', $query);
 	$galeriresim = array();
@@ -114,13 +114,13 @@ function galeriresimsil($sil)
     SELECT
     	p.id_resim, p.dosyaismi, p.kucukdosyaismi,  p.id_uye
     FROM {db_prefix}SnrjGaleri as p
-    WHERE id_resim= $id LIMIT 1");
+    WHERE id_resim= '$id' LIMIT 1");
 	$sil = $smcFunc['db_fetch_assoc']($dbresult);
 	$smcFunc['db_free_result']($dbresult);
 	$resimyolu= $boarddir . '/galeri/';
 		@unlink($resimyolu . $sil['dosyaismi']);
 		@unlink($resimyolu .'mini/'. $sil['kucukdosyaismi']);
-		$smcFunc['db_query']('', "DELETE FROM {db_prefix}SnrjGaleri WHERE id_resim= $id LIMIT 1");
+		$smcFunc['db_query']('', "DELETE FROM {db_prefix}SnrjGaleri WHERE id_resim= '$id' LIMIT 1");
 }
 function galeriup($gonderveri)
 {
@@ -137,7 +137,7 @@ function galeriup($gonderveri)
 	$tim=$gonderveri['tim'];
 	$smcFunc['db_query']('', "INSERT INTO {db_prefix}SnrjGaleri
 		(boyut,kucukdosyaismi,dosyaismi, yukseklik, genislik, etiket, baslik, aciklama,id_uye,tarih)
-		VALUES ('$boyut','$kucukdosyaismi', '$dosyaismi', '$sizes', '$size', '$etiket','$baslik', '$aciklama',$id_uye,'$tim')");
+		VALUES ('$boyut','$kucukdosyaismi', '$dosyaismi', '$sizes', '$size', '$etiket','$baslik', '$aciklama','$id_uye','$tim')");
 }
 function OncekiResim($id = 0)
 {
@@ -146,7 +146,7 @@ function OncekiResim($id = 0)
 		SELECT
 			p.id_resim
 		FROM {db_prefix}SnrjGaleri as p
-		WHERE p.id_resim > $id
+		WHERE p.id_resim > '$id'
 		ORDER BY p.id_resim ASC LIMIT 1");
 	if ($smcFunc['db_affected_rows']() != 0)
 	{
@@ -166,7 +166,7 @@ function SonrakiResim($id = 0)
 		SELECT
 			p.id_resim
 		FROM {db_prefix}SnrjGaleri as p
-		WHERE p.id_resim < $id
+		WHERE p.id_resim < '$id'
 		ORDER BY p.id_resim DESC LIMIT 1");
 
 	if ($smcFunc['db_affected_rows']() != 0)
@@ -188,7 +188,7 @@ function galeriresimara($ara)
     SELECT
     	p.id_resim, p.id_uye, m.real_name, p.baslik, p.etiket, p.aciklama, p.dosyaismi, p.kucukdosyaismi, p.tarih,p.bakanlar,p.boyut, p.yukseklik, p.genislik,p.toplamderece, p.derece,p.tur FROM {db_prefix}SnrjGaleri as p
     LEFT JOIN {db_prefix}members AS m ON (p.id_uye = m.id_member)
-    WHERE $aramaquery ");
+    WHERE '$aramaquery' ");
 	$arar = array();
 	while($row = $smcFunc['db_fetch_assoc']($dbresult))
 		{
@@ -222,14 +222,14 @@ function galeriresimoyla($oyla)
     SELECT
     	id_uye, id_resim
     FROM {db_prefix}SnrjGaleri_derece
-    WHERE id_uye = " . $user_info['id'] . " AND id_resim = $id");
+    WHERE id_uye = " . $user_info['id'] . " AND id_resim = '$id'");
     $sor = $smcFunc['db_affected_rows']();
  	$smcFunc['db_free_result']($dbresult);
 	$dbresult = $smcFunc['db_query']('', "
     SELECT
     	id_uye
     FROM {db_prefix}SnrjGaleri
-    WHERE id_resim = $id LIMIT 1");
+    WHERE id_resim = '$id' LIMIT 1");
     $row = $smcFunc['db_fetch_assoc']($dbresult);
 	$smcFunc['db_free_result']($dbresult);
 	if ($user_info['id'] == $row['id_uye'])
@@ -241,12 +241,12 @@ function galeriresimoyla($oyla)
 	$smcFunc['db_query']('', 
 	"INSERT INTO {db_prefix}SnrjGaleri_derece 
 	(id_uye, id_resim, deger) 
-	VALUES (" . $user_info['id'] . ", $id,$derece)
+	VALUES (" . $user_info['id'] . ", '$id','$derece')
 	");
 	$smcFunc['db_query']('', "
 	UPDATE {db_prefix}SnrjGaleri
-		SET toplamderece = toplamderece + 1, derece = derece + $derece
-	WHERE id_resim = $id LIMIT 1");
+		SET toplamderece = toplamderece + 1, derece = derece + '$derece'
+	WHERE id_resim = '$id' LIMIT 1");
 }
 function formatBytes($bytes, $precision = 1) {
     $units = [' B', ' Kb', ' Mb', 'Gigabyte', 'Terabyte'];
